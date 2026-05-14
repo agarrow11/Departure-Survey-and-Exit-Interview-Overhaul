@@ -1884,5 +1884,39 @@ renderAssigneeBar();
 renderWeekly();
 </script>
 
+<script>
+  const GITHUB_TOKEN = localStorage.getItem('gh_token');
+
+if (!GITHUB_TOKEN) {
+  const t = prompt('Enter your GitHub token:');
+  localStorage.setItem('gh_token', t);
+  location.reload();
+}
+  const REPO = 'agarrow11/Departure-Survey-and-Exit-Interview-Overhaul';
+  const FILE_PATH = 'index.html';
+
+  async function autoSave() {
+    const content = btoa(unescape(encodeURIComponent(document.documentElement.outerHTML)));
+    
+    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
+      headers: { Authorization: `token ${GITHUB_TOKEN}` }
+    });
+    const { sha } = await res.json();
+
+    await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
+      method: 'PUT',
+      headers: { Authorization: `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Auto-save', content, sha })
+    });
+
+    console.log('Saved!');
+  }
+
+  let timer;
+  document.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(autoSave, 2000);
+  });
+</script>
 
 </body></html>
