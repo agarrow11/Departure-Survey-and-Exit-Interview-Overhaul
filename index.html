@@ -1682,7 +1682,35 @@
 </div>
 
 <!-- Modal mount -->
-<div id="modal-root"></div>
+<div id="modal-root"><div class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <h3>Add new task</h3>
+      <label>Task description</label>
+      <input type="text" id="n-task" placeholder="Describe the task...">
+      <label>Workstream</label>
+      <select id="n-ws"><option value="AI In Departure Process">AI In Departure Process</option><option value="Dashboard Redesign">Dashboard Redesign</option><option value="Departure Survey &amp; Exit Interview Redesign">Departure Survey &amp; Exit Interview Redesign</option></select>
+      <label>Phase</label>
+      <input type="text" id="n-phase" placeholder="e.g. Administration &amp; Migration">
+      <label>Assigned to</label>
+      <select id="n-to"><option value="AG">AG</option><option value="CG">CG</option><option value="JP">JP</option><option value="KK">KK</option><option value="KV">KV</option><option value="">—</option></select>
+      <label>Week of (e.g. May 12, 2026)</label>
+      <input type="text" id="n-wk" placeholder="e.g. May 12, 2026 or TBD">
+      <label>Deadline (e.g. Jun 30 or 2025-06-30)</label>
+      <input type="text" id="n-deadline" placeholder="Optional — e.g. Jun 30">
+      <label>Priority</label>
+      <select id="n-priority"><option value="">— None —</option><option value="High">High</option><option value="Medium">Medium</option><option value="Low">Low</option></select>
+      <label>Blocker / dependency</label>
+      <input type="text" id="n-blocker" placeholder="Optional — what must happen first?">
+      <label>Status</label>
+      <select id="n-st"><option value="To Do">To Do</option><option value="In Progress">In Progress</option><option value="In Review">In Review</option><option value="On Hold">On Hold</option><option value="Completed">Completed</option><option value="Cancelled">Cancelled</option></select>
+      <label>Notes</label>
+      <textarea id="n-notes" placeholder="Optional notes..."></textarea>
+      <div class="modal-btns">
+        <button onclick="closeModal()">Cancel</button>
+        <button class="btn-primary" onclick="submitAdd()">Add task</button>
+      </div>
+    </div>
+  </div></div>
 <div class="gantt-tooltip" id="gantt-tip" style="display: none; left: 327px; top: 469px;"><strong>Understand output functionality of interview transcript</strong><br>Phase: App Selection &amp; Design<br>Assigned: AG<br>Status: Completed</div>
 
 <!-- Footer -->
